@@ -1,0 +1,31 @@
+package_name: coffeehack
+class_name: CoffeeHack
+description: Hacked coffee machine Snips skill
+intents:
+  - intent: pour
+    action: |
+      {%
+      coffee_type = ''
+      coffee_size = ''
+      coffee_taste = ''
+      number = 1
+      
+      if len(snips.intent.coffee_type):
+        coffee_type = snips.intent.coffee_type[0]
+      if len(snips.intent.coffee_size):
+        coffee_size = snips.intent.coffee_size[0]
+      if len(snips.intent.coffee_taste):
+        coffee_taste = snips.intent.coffee_taste[0]
+      if len(snips.intent.coffee_number):
+        number = int(snips.intent.coffee_number[0])
+      snips.skill.pour(coffee_type = coffee_type,
+                coffee_size = coffee_size,
+                coffee_taste = coffee_taste,
+                number = number,
+                dialogue = snips.dialogue)
+      %}
+  - intent: coffee_toggle
+    action: |
+      {%
+      snips.skill.toggle_on_off(snips.dialogue)
+      %}
